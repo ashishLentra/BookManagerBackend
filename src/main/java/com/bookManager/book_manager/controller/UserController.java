@@ -16,7 +16,7 @@ import com.bookManager.book_manager.model.User;
 import com.bookManager.book_manager.repo.UserRepo;
 
 @RestController
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:4200/")
 public class UserController {
 	
 	@Autowired

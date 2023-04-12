@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,7 +21,7 @@ import com.bookManager.book_manager.repo.BookRepo;
 //import com.bookManager.book_manager.service.CrudService;
 
 @RestController
-@CrossOrigin(origins = "*")
+@CrossOrigin
 public class CrudRestController {
 	
 	 @Autowired
@@ -49,6 +50,13 @@ public class CrudRestController {
 		 return data;
 	 }
 	 
+	 @PutMapping("/updateBook")
+	 public Book updateBook(@RequestBody Book book) {
+		 Book data = repo.save(book);
+		 return data;
+	 }
+	 
+	 
 	 //post
 //	 @PostMapping("/addBook")
 //	 public Book addBook(@RequestBody Book book) {
@@ -57,7 +65,7 @@ public class CrudRestController {
 //	 }
 //	 
 	 
-
+	 
 	 @GetMapping("/book/{id}")
 	 public Book getbookById(@PathVariable("id") int id ) {
 		 Book data = repo.findById(id).get();
@@ -74,16 +82,12 @@ public class CrudRestController {
 	 
 
 	 
-	 
-
-//	 
+	 	 
 	  @DeleteMapping("/deleteBook/{id}")
 	  public void deleteBook(@PathVariable int id){
 	        //Logic to get delete product by id from database
 	    	   repo.deleteById(id);
 	    	
-
-//	        return service.deleteProductById(id);
 	  }
 	 
 	    //delete
