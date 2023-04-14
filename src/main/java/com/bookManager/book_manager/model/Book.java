@@ -3,17 +3,21 @@
 package com.bookManager.book_manager.model;
 
 import jakarta.persistence.Entity;
-//import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.GeneratedValue;
 //import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "book")
+//@SequenceGenerator(name = "port_gen", sequenceName = "port_gen",  initialValue = 4700)
 public class Book {
 	
 	@Id
-//	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+//	@GeneratedValue(strategy = GenerationType.AUTO, generator = "port_gen")
 	private int id;
 	
 	private String title;

@@ -17,87 +17,62 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bookManager.book_manager.model.Book;
-import com.bookManager.book_manager.repo.BookRepo;
-//import com.bookManager.book_manager.service.CrudService;
+//import com.bookManager.book_manager.repo.BookRepo;
+import com.bookManager.book_manager.service.CrudService;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:4200/")
 public class CrudRestController {
 	
-	 @Autowired
-	 private BookRepo repo;
+
 	
-//	@Autowired
-//	private CrudService service;
+	@Autowired 
+	private CrudService service; 
 	 
+
+	 
+	
 	 @GetMapping("/book")
 	 public List<Book> getAllBooks() {
-		 List<Book> data = repo.findAll();
+		 List<Book> data = service.getBookFromRepo();
 		 return data;
-	 }
+	 } 
 	 
-	//get
-//	 @GetMapping("/book")
-//	 public List<Book> getAllBooks() {
-//		 List<Book> data = service.getBookFromRepo();
-//		 return data;
-//	 }
 	 
+
 	 
 	 @PostMapping("/addBook")
 	 public Book addBook(@RequestBody Book book) {
-		 Book data = repo.save(book);
+		 Book data = service.PersistBookIntoRepo(book);
 		 return data;
-	 }
+	 } 
 	 
-	 @PutMapping("/updateBook")
+	 
+	 
+	 @PostMapping("/updateBook")
 	 public Book updateBook(@RequestBody Book book) {
-		 Book data = repo.save(book);
+		 Book data = service.UpdateBookIntoRepo(book);
 		 return data;
-	 }
+	 } 
 	 
 	 
-	 //post
-//	 @PostMapping("/addBook")
-//	 public Book addBook(@RequestBody Book book) {
-//		 Book data = service.PersistBookIntoRepo();
-//		 return data;
-//	 }
-//	 
 	 
 	 
+
 	 @GetMapping("/book/{id}")
 	 public Book getbookById(@PathVariable("id") int id ) {
-		 Book data = repo.findById(id).get();
+		 Book data = service.getBookById(id).get();
 		 return data;
 	 }
-	 
-	 
-	 //update
-//	 @GetMapping("/book/{id}")
-//	 public Book getbookById(@PathVariable("id") int id ) {
-//		 Book data = service.getBookById(id).get();
-//		 return data;
-//	 }
 	 
 
 	 
-	 	 
 	  @DeleteMapping("/deleteBook/{id}")
 	  public void deleteBook(@PathVariable int id){
-	        //Logic to get delete product by id from database
-	    	   repo.deleteById(id);
-	    	
+	      
+		  service.deleteProductById(id);
+	    	   	  
 	  }
-	 
-	    //delete
-//	    @DeleteMapping("/deleteBook/{id}")
-//	    public String deleteBook(@PathVariable int id){
-//	        //Logic to get delete product by id from database
-//	    	  return service.deleteProductById(id);
-//	    	  
-//	    	  
-//	    }
 	    
 	    
 	    
